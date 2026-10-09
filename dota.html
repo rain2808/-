@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Блеб Дота 2 — Легендарные моменты</title>
+<style>
+:root{--accent:#e83838;--accent2:#c02a35;--accent3:#a01818;--bg:#0a0406;--fg:#f2e8e8;--muted:#8a7075}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--fg);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;overflow-x:hidden;scroll-behavior:smooth}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");opacity:.08;pointer-events:none;z-index:200;mix-blend-mode:overlay}
+.spotlight{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,56,56,.2),transparent 65%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);filter:blur(45px);left:-9999px;top:-9999px}
+.glow{position:fixed;border-radius:50%;filter:blur(190px);z-index:-1;pointer-events:none;opacity:.28}
+.g1{width:600px;height:600px;background:var(--accent);top:-200px;right:-200px;animation:f1 14s ease-in-out infinite}
+.g2{width:500px;height:500px;background:var(--accent3);bottom:20%;left:-200px;animation:f2 18s ease-in-out infinite}
+.g3{width:400px;height:400px;background:var(--accent2);top:50%;right:10%;animation:f1 20s ease-in-out infinite reverse}
+@keyframes f1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-100px,80px) scale(1.2)}}
+@keyframes f2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(120px,-60px) scale(1.15)}}
+.wrap{max-width:960px;margin:0 auto;padding:3rem 1.5rem;position:relative;z-index:2}
+.top-links{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-bottom:2rem}
+.top-links a{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border:1px solid #2a1418;border-radius:100px;background:#12080a;color:#e8d5d8;text-decoration:none;font-size:.85rem;font-weight:600;transition:.3s}
+.top-links a:hover{border-color:var(--accent);color:#fff;transform:translateY(-3px)}
+.top-links svg{width:16px;height:16px;fill:currentColor}
+.twitch svg{color:#a970ff}.tg svg{color:#29b6f6}
+.hero{min-height:50vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.eyebrow{font-size:.7rem;letter-spacing:.5em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
+.hero-title{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.hero-title h1{font-size:clamp(2.5rem,14vw,7rem);font-weight:900;line-height:.85;letter-spacing:-.06em;text-transform:uppercase;background:linear-gradient(120deg,#f5e5e5 20%,var(--accent) 45%,var(--accent2) 70%,var(--accent3) 95%);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 8s infinite}
+@keyframes shine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-photo{width:clamp(90px,18vw,170px);height:clamp(70px,14vw,130px);border-radius:16px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,var(--accent),var(--accent3));display:flex;align-items:center;justify-content:center;font-size:clamp(1rem,3vw,1.5rem);font-weight:900;color:#fff;text-transform:uppercase;border:3px solid rgba(255,255,255,.22);box-shadow:0 0 25px rgba(232,56,56,.5);animation:pp 4s infinite}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes pp{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.sub{font-size:clamp(1rem,3vw,1.25rem);color:var(--muted);margin-top:1.5rem;max-width:520px;border-left:2px solid var(--accent);padding-left:1rem}
+.crown{display:inline-block;font-size:clamp(.8rem,2.5vw,1.1rem);letter-spacing:.35em;text-transform:uppercase;color:var(--accent2);margin-top:1.2rem;padding:.5rem 1.2rem;border:1px solid rgba(232,56,56,.35);border-radius:100px;background:rgba(232,56,56,.07);width:fit-content;animation:cg 3s infinite}
+@keyframes cg{0%,100%{box-shadow:0 0 10px rgba(232,56,56,.15)}50%{box-shadow:0 0 25px rgba(232,56,56,.45)}}
+.btn-meyn{display:inline-block;margin-top:1.5rem;padding:.8rem 1.8rem;background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;border-radius:100px;text-decoration:none;font-weight:700;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;transition:.3s;width:fit-content}
+.btn-meyn:hover{transform:translateY(-3px);box-shadow:0 15px 35px -15px var(--accent)}
+.saturn{position:relative;width:100%;height:520px;display:flex;align-items:center;justify-content:center;margin:2rem 0;overflow:visible;background:radial-gradient(circle at 50% 50%,rgba(232,56,56,.25),transparent 55%),radial-gradient(circle at 50% 50%,rgba(160,24,24,.18),transparent 70%);border-radius:50%}
+.saturn::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,56,56,.2),rgba(160,24,24,.12) 40%,transparent 70%);filter:blur(110px);animation:sp 6s infinite;pointer-events:none;z-index:0}
+@keyframes sp{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:.9}}
+.saturn-photo{position:relative;width:180px;height:180px;border-radius:50%;z-index:10;background:linear-gradient(135deg,var(--accent),var(--accent3));display:flex;align-items:center;justify-content:center;font-size:4.5rem;font-weight:900;color:#fff;border:3px solid rgba(255,255,255,.25);box-shadow:0 0 38px rgba(232,56,56,.6);animation:pp 4s infinite;overflow:hidden}
+.saturn-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.ring{position:absolute;top:50%;left:50%;width:0;height:0;pointer-events:none}
+.ring-1{animation:spin 22s linear infinite}
+.ring-2{animation:spin 34s linear infinite reverse}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.ring .word{position:absolute;top:0;left:0;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#fff;white-space:nowrap;padding:.4rem .9rem;text-shadow:0 0 10px rgba(232,56,56,.7)}
+.ring .word span{display:inline-block}
+.ring-1 .word span{animation:cs 22s linear infinite}
+.ring-2 .word span{animation:cs 34s linear infinite reverse}
+@keyframes cs{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+.block{margin:6rem 0;position:relative}
+.num{font-size:.7rem;letter-spacing:.5em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;display:block}
+h2{font-size:clamp(1.8rem,7vw,3.5rem);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:1.5rem;color:#f5e5e5}
+h2 em{font-style:normal;color:var(--accent)}
+p{color:#c8b8b8;font-size:1.05rem;line-height:1.7;max-width:640px}
+p+p{margin-top:1rem}
+
+.floaters{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.floater{position:absolute;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,rgba(232,56,56,.25),rgba(160,24,24,.15));border:2px solid rgba(232,56,56,.35);display:flex;align-items:center;justify-content:center;color:#fff;opacity:.65;box-shadow:0 0 35px rgba(232,56,56,.35);animation:fall linear infinite}
+.floater img{width:100%;height:100%;object-fit:cover;border-radius:20px}
+@keyframes fall{
+  0%{transform:translateY(-200px) rotate(0deg);opacity:0}
+  10%{opacity:.7}
+  90%{opacity:.7}
+  100%{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+@media(max-width:768px){.floater{opacity:.4!important}}
+
+.egg-dot{position:absolute;width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,56,56,.5),rgba(232,56,56,.1) 60%,transparent);
+  border:1px solid rgba(232,56,56,.25);cursor:crosshair;transition:.4s;z-index:5;
+  animation:eggPulse 3s ease-in-out infinite}
+@keyframes eggPulse{0%,100%{box-shadow:0 0 8px rgba(232,56,56,.2);opacity:.5}50%{box-shadow:0 0 20px rgba(232,56,56,.5);opacity:.9}}
+.egg-dot::after{content:attr(data-hint);position:absolute;left:50%;bottom:150%;transform:translateX(-50%) translateY(6px);background:#1a0a0e;border:1px solid rgba(232,56,56,.45);color:#ffb3b3;font-size:.68rem;padding:.3rem .7rem;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.3s;font-weight:600;letter-spacing:.08em;z-index:100}
+.egg-dot:hover{transform:scale(1.6);background:radial-gradient(circle,var(--accent),transparent 70%);border-color:var(--accent);box-shadow:0 0 30px var(--accent)}
+.egg-dot:hover::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.egg-dot.revealed{background:radial-gradient(circle,var(--accent),transparent 70%);border-color:var(--accent);box-shadow:0 0 25px var(--accent)}
+
+.teammates{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem;margin-top:2.5rem}
+.tm-card{background:#12080a;border:1px solid #241014;border-radius:16px;padding:1.2rem;text-align:center;transition:.3s}
+.tm-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 25px 45px -25px rgba(232,56,56,.7)}
+.tm-photo{width:90px;height:90px;border-radius:50%;margin:0 auto 1rem;background:linear-gradient(135deg,var(--accent),var(--accent3));display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:900;color:#fff;border:3px solid rgba(255,255,255,.18);box-shadow:0 0 25px rgba(232,56,56,.5);transition:.3s;overflow:hidden}
+.tm-card:hover .tm-photo{transform:scale(1.08);box-shadow:0 0 40px rgba(232,56,56,.8)}
+.tm-nick{font-weight:800;font-size:.95rem;color:#fff;margin-bottom:.3rem}
+.tm-role{font-size:.78rem;color:#e8d5d8;line-height:1.4}
+.tm-tag{display:inline-block;margin-top:.6rem;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);padding:.25rem .7rem;border:1px solid rgba(232,56,56,.3);border-radius:100px;background:rgba(232,56,56,.06)}
+
+.video-strip{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:2.5rem;padding-bottom:1rem;scrollbar-width:thin;scrollbar-color:#a01818 #12080a}
+.video-strip::-webkit-scrollbar{height:8px}
+.video-strip::-webkit-scrollbar-track{background:#12080a;border-radius:4px}
+.video-strip::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:4px}
+.video-card{flex:0 0 300px;scroll-snap-align:start;background:#12080a;border:1px solid #241014;border-radius:14px;overflow:hidden;transition:.3s}
+.video-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 20px 40px -20px rgba(232,56,56,.7)}
+.video-card video,.video-card iframe{width:100%;display:block;background:#000;aspect-ratio:16/9;border:0}
+.video-title{padding:.8rem 1rem;font-size:.85rem;font-weight:700;color:#e8d5d8;border-top:1px solid #241014}
+
+footer{text-align:center;padding:4rem 1rem 2rem;color:#4a2a30;font-size:.75rem;letter-spacing:.25em;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(40px);transition:1s}
+.reveal.on{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="floaters" id="floaters"></div>
+<div class="spotlight" id="spot"></div>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<div class="glow g3"></div>
+<div class="wrap">
+
+<div class="top-links">
+<a class="twitch" href="https://twitch.tv/sasavot" target="_blank"><svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>Twitch</a>
+<a class="tg" href="https://t.me/sasavot" target="_blank"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
+</div>
+
+<section class="hero">
+<div class="eyebrow">dota 2 · moments · sasavot</div>
+<div class="hero-title">
+<h1>блеб<br>дота 2</h1>
+<div class="hero-photo"><img src="dota-hero.jpg" alt="D2" onerror="this.remove(); this.parentNode.innerHTML='<span>D2</span>';"></div>
+</div>
+<div class="sub">Легендарные моменты из Dota 2 — фрагменты стримов, которые вошли в историю.</div>
+<div class="crown">♛ Dota 2 ♛</div>
+<a href="sasavot.html" class="btn-meyn">← Назад к sasavot</a>
+</section>
+
+<div class="saturn">
+<div class="ring ring-1" id="ring1"></div>
+<div class="ring ring-2" id="ring2"></div>
+<div class="saturn-photo"><img src="dota-orbit.jpg" alt="D2" onerror="this.remove(); this.parentNode.innerHTML='<span>D2</span>';"></div>
+</div>
+
+<section class="block reveal">
+<span class="num">01 — Тиммейты</span>
+<h2>Тиммейты <em>Блеба</em></h2>
+<p>Те, с кем Блеб играл в Dota 2 — состав и не только.</p>
+<div class="teammates">
+
+<div class="tm-card">
+<div class="tm-photo"><span>Б</span></div>
+<div class="tm-nick">Sasavot</div>
+<div class="tm-role">Глеб</div>
+<div class="tm-tag">Блеб</div>
+</div>
+
+<div class="tm-card">
+<div class="tm-photo"><span>Ш</span></div>
+<div class="tm-nick">Spokoynich</div>
+<div class="tm-role">Максим</div>
+<div class="tm-tag">Шеф</div>
+</div>
+
+<div class="tm-card">
+<div class="tm-photo"><span>Д</span></div>
+<div class="tm-nick">dasha228play</div>
+<div class="tm-role">Дарья</div>
+<div class="tm-tag">Даша228плей</div>
+</div>
+
+<div class="tm-card">
+<div class="tm-photo"><span>Л</span></div>
+<div class="tm-nick">iceicell</div>
+<div class="tm-role">Лиза</div>
+<div class="tm-tag">Лиза</div>
+</div>
+
+<div class="tm-card">
+<div class="tm-photo"><span>В</span></div>
+<div class="tm-nick">rostikfacekid</div>
+<div class="tm-role">Ростик</div>
+<div class="tm-tag">Волосалка</div>
+</div>
+
+<div class="tm-card">
+<div class="tm-photo"><span>Р</span></div>
+<div class="tm-nick">helin139</div>
+<div class="tm-role">Кирилл</div>
+<div class="tm-tag">Рыжий</div>
+</div>
+
+<div class="tm-card">
+<div class="tm-photo"><span>М</span></div>
+<div class="tm-nick">morphe_ya</div>
+<div class="tm-role">Валерия</div>
+<div class="tm-tag">Морфи</div>
+</div>
+
+<div class="tm-card">
+<div class="tm-photo"><span>Р</span></div>
+<div class="tm-nick">r4dom1r</div>
+<div class="tm-role">Радомир</div>
+<div class="tm-tag">Рома</div>
+</div>
+
+<div class="tm-card">
+<div class="tm-photo"><span>Ю</span></div>
+<div class="tm-nick">yurapivo</div>
+<div class="tm-role">Юра</div>
+<div class="tm-tag">Юра Пиво</div>
+</div>
+
+</div>
+</section>
+
+<section class="block reveal">
+<span class="num">02 — Видео</span>
+<h2>Легендарные <em>моменты</em></h2>
+<p>Лучшие фрагменты стримов — листай вбок.</p>
+<div class="video-strip">
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video1.mp4" type="video/mp4"></video>
+    <div class="video-title">ZXC</div>
+  </div>
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video2.mp4" type="video/mp4"></video>
+    <div class="video-title">Как появился Ровшан</div>
+  </div>
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video3.mp4" type="video/mp4"></video>
+    <div class="video-title">Глеб начинай</div>
+  </div>
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video4.mp4" type="video/mp4"></video>
+    <div class="video-title">Алхимик мама мама мама стой</div>
+  </div>
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video5.mp4" type="video/mp4"></video>
+    <div class="video-title">Глеб давай это Огнев</div>
+  </div>
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video6.mp4" type="video/mp4"></video>
+    <div class="video-title">Прическа как у Шейкера</div>
+  </div>
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video7.mp4" type="video/mp4"></video>
+    <div class="video-title">Поздравляю у вас Абобус</div>
+  </div>
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video8.mp4" type="video/mp4"></video>
+    <div class="video-title">Прайм</div>
+  </div>
+  <div class="video-card">
+    <video controls preload="metadata"><source src="video9.mp4" type="video/mp4"></video>
+    <div class="video-title">Так это пароль</div>
+  </div>
+</div>
+</section>
+
+<footer>© 2026 · блеб дота 2 · sasavot</footer>
+</div>
+
+<script>
+var spot=document.getElementById('spot');
+document.addEventListener('mousemove',function(e){spot.style.left=e.clientX+'px';spot.style.top=e.clientY+'px'});
+document.addEventListener('touchmove',function(e){var t=e.touches[0];spot.style.left=t.clientX+'px';spot.style.top=t.clientY+'px'},{passive:true});
+
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+var ring1=document.getElementById('ring1'),ring2=document.getElementById('ring2');
+
+var w1=['«10К ЧАСОВ В ДОТЕ»','«пудж оставь реген»','«блять»','«мама мама мама»','«это пиздец»','«стилер, ясно ты стилер ебаный»','«ай ай ай»','«оставь крипа друг»'];
+w1.forEach(function(text,i){var el=document.createElement('div');el.className='word';el.innerHTML='<span>'+text+'</span>';var a=(360/w1.length)*i;el.style.transform='translate(-50%,-50%) rotate('+a+'deg) translateX(190px) rotate(-'+a+'deg)';el.style.left='50%';el.style.top='50%';ring1.appendChild(el)});
+
+var w2=['«тп фласку»','«какой баш ебанутый»','«Ха Ха Ха»','«сыкотно да»','«а вы вообще знаете, как появился Ровшан»','«Глав Врачь при родах вашей жены, у вас абобус»','«мы идем в Доту? ты кто?»','«Прическа как у Шейкера»','«не, сначала победи свою команду, а потом уже противника»','«да заткни ебало нахуй, я нихуя не слышу»','«Макс есть рп, эхо слэм есть»','«Ой ой ой блять»','«дазл не стоп меня, пиздец тут просто пизда»'];
+w2.forEach(function(text,i){var el=document.createElement('div');el.className='word';el.innerHTML='<span>'+text+'</span>';var a=(360/w2.length)*i;el.style.transform='translate(-50%,-50%) rotate('+a+'deg) translateX(280px) rotate(-'+a+'deg)';el.style.left='50%';el.style.top='50%';ring2.appendChild(el)});
+
+(function(){
+  var box=document.getElementById('floaters');
+  var items=['float1.jpg','float2.jpg','float3.jpg','float4.jpg','float5.jpg','float6.jpg'];
+  var count=12,lanes=12;
+  for(var i=0;i<count;i++){
+    var el=document.createElement('div');
+    el.className='floater';
+    var src=items[i%items.length];
+    el.innerHTML='<img src="'+src+'" alt="" onerror="this.remove()">';
+    if(i%2===0){el.style.left=(1+Math.random()*4)+'%';} else {el.style.right=(1+Math.random()*4)+'%';}
+    if(src==='float1.jpg'){el.style.width=(160+Math.random()*60)+'px';el.style.height=(90+Math.random()*40)+'px';}
+    else{var size=80+Math.random()*70;el.style.width=el.style.height=size+'px';}
+    el.style.animationDuration=(20+Math.random()*10)+'s';
+    el.style.animationDelay=-(i*(25/lanes))+'s';
+    box.appendChild(el);
+  }
+})();
+
+(function(){
+  var wrap=document.querySelector('.wrap');
+  if(!wrap)return;
+  wrap.style.position='relative';
+  var hints=['▸ прайм','▸ kishki','▸ датебаё','▸ 141iq','▸ блеба больше нету','▸ 4к ммр','▸ пудж реген','▸ курская годзилла','▸ жук скоробей','▸ рофлили тогда','▸ оставь крипа друг','▸ это пиздец','▸ мэр курска','▸ сасыч'];
+  for(var i=0;i<14;i++){
+    var el=document.createElement('div');
+    el.className='egg-dot';
+    el.setAttribute('data-hint',hints[i%hints.length]);
+    el.style.left=(3+Math.random()*92)+'%';
+    el.style.top=(2+Math.random()*96)+'%';
+    el.style.animationDelay=(-Math.random()*3)+'s';
+    wrap.appendChild(el);
+  }
+  document.querySelectorAll('.egg-dot').forEach(function(el){
+    el.addEventListener('click',function(){el.classList.toggle('revealed');});
+  });
+})();
+</script>
+</body>
+</html>

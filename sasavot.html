@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>sasavot</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0406;color:#f2e8e8;font-family:sans-serif;overflow-x:hidden;background-image:radial-gradient(circle at 15% 10%,rgba(230,55,55,.28),transparent 45%),radial-gradient(circle at 85% 20%,rgba(180,30,40,.24),transparent 50%),radial-gradient(circle at 50% 100%,rgba(200,40,50,.2),transparent 55%)}
+.wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+#enter{position:fixed;top:0;left:0;width:0;height:0}
+.spotlight{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(240,70,70,.2),transparent 65%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);filter:blur(45px);left:-9999px;top:-9999px}
+.glow{position:fixed;border-radius:50%;filter:blur(190px);z-index:-1;pointer-events:none;opacity:.32}
+.g1{width:600px;height:600px;background:#e83838;top:-200px;right:-200px;animation:fl1 14s ease-in-out infinite}
+.g2{width:500px;height:500px;background:#a01a25;bottom:20%;left:-200px;animation:fl2 18s ease-in-out infinite}
+.g3{width:400px;height:400px;background:#c02a35;top:50%;right:10%;animation:fl1 20s ease-in-out infinite reverse}
+@keyframes fl1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-100px,80px) scale(1.2)}}
+@keyframes fl2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(120px,-60px) scale(1.15)}}
+.welcome{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:.8s;overflow:hidden}
+.grid-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(rgba(230,55,55,.1) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(230,55,55,.1) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(rgba(230,55,55,.24) 1px,transparent 1px) 0 0/200px 200px,linear-gradient(90deg,rgba(230,55,55,.24) 1px,transparent 1px) 0 0/200px 200px,radial-gradient(circle at 50%,#1a0508,#0a0406 80%)}
+.grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(230,55,55,.25),transparent 60%);filter:blur(70px);pointer-events:none}
+.welcome h1{position:relative;z-index:2;font-size:clamp(1.8rem,7vw,5rem);font-weight:900;letter-spacing:.05em;text-transform:uppercase;background:linear-gradient(120deg,#f5e5e5,#e83838,#a01818);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;text-shadow:0 0 50px rgba(230,55,55,.5);padding:0 1rem;line-height:1.1}
+.welcome p{position:relative;z-index:2;color:#c8a8a8;font-size:.85rem;letter-spacing:.4em;text-transform:uppercase}
+.wbtn{position:relative;z-index:2;padding:1rem 3rem;border:1px solid #c02a2a;border-radius:100px;background:rgba(230,55,55,.12);color:#f5e5e5;font-size:1rem;font-weight:800;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;transition:.3s}
+.wbtn:hover{background:#c02a2a;box-shadow:0 0 38px rgba(230,55,55,.65);transform:scale(1.05)}
+#enter:target ~ .welcome{opacity:0;visibility:hidden;pointer-events:none}
+.drop{position:absolute;top:-60px;pointer-events:none;z-index:1;animation:dropFall linear infinite;filter:drop-shadow(0 2px 4px rgba(230,55,55,.55))}
+.drop .body{position:relative;width:100%;height:100%;border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;background:radial-gradient(ellipse 40% 25% at 32% 22%,rgba(250,225,225,.95) 0%,rgba(250,225,225,.55) 35%,transparent 70%),radial-gradient(ellipse 18% 12% at 30% 35%,rgba(250,225,225,.9) 0%,transparent 80%),radial-gradient(ellipse 12% 8% at 68% 30%,rgba(245,205,205,.45) 0%,transparent 80%),radial-gradient(ellipse 70% 60% at 50% 65%,rgba(235,85,85,.95) 0%,rgba(200,55,55,.92) 30%,rgba(140,30,40,.95) 65%,rgba(85,15,22,1) 90%,rgba(55,8,14,1) 100%),radial-gradient(ellipse 60% 40% at 50% 100%,rgba(55,8,14,.9) 0%,transparent 70%);box-shadow:inset 0 -6px 10px rgba(55,8,14,.6),inset 0 6px 10px rgba(250,225,225,.3)}
+.drop .body::before{content:'';position:absolute;top:-28%;left:50%;transform:translateX(-50%);width:45%;height:45%;background:linear-gradient(180deg,transparent 0%,rgba(170,40,40,.75) 60%,rgba(235,85,85,.9) 100%);border-radius:50% 50% 20% 20%;clip-path:polygon(50% 0,75% 100%,25% 100%)}
+.drop .body::after{content:'';position:absolute;bottom:8%;left:20%;width:60%;height:20%;border-radius:50%;background:radial-gradient(ellipse,rgba(65,10,16,.75),transparent 70%);filter:blur(2px)}
+.drop .bubble{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(250,225,225,.9),rgba(230,190,190,.45) 50%,transparent 80%);box-shadow:inset -1px -1px 2px rgba(100,18,22,.6)}
+.drop .b1{width:10%;height:8%;top:52%;left:35%}
+.drop .b2{width:7%;height:6%;top:62%;left:55%}
+.drop .b3{width:6%;height:5%;top:70%;left:42%}
+.drop .b4{width:5%;height:4%;top:58%;left:62%}
+.drop .b5{width:4%;height:3%;top:75%;left:55%}
+@keyframes dropFall{0%{transform:translateY(0) scale(var(--s,1));opacity:0}5%{opacity:1}95%{opacity:1}100%{transform:translateY(115vh) scale(var(--s,1));opacity:0}}
+.floaters{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.top-links{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-bottom:2rem}
+.top-links a{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border:1px solid #2a1418;border-radius:100px;background:#12080a;color:#e8d5d8;text-decoration:none;font-size:.85rem;font-weight:600;transition:.3s}
+.top-links a:hover{border-color:#c02a2a;color:#fff;transform:translateY(-3px)}
+.top-links svg{width:16px;height:16px;fill:currentColor}
+.twitch svg{color:#a970ff}
+.tg svg{color:#29b6f6}
+h1{font-size:clamp(3rem,15vw,8rem);font-weight:900;line-height:.9;letter-spacing:-.05em;text-transform:uppercase;background:linear-gradient(120deg,#f5e5e5 20%,#e83838 50%,#a01818 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{color:#a08888;border-left:2px solid #c02a2a;padding-left:1rem;margin:1.5rem 0;max-width:520px}
+.crown{display:inline-block;padding:.5rem 1.2rem;border:1px solid rgba(230,55,55,.4);border-radius:100px;color:#e83838;font-size:.85rem;letter-spacing:.3em;text-transform:uppercase}
+.btn-row{display:flex;gap:.8rem;flex-wrap:wrap;margin:1.5rem 0}
+.btn{display:inline-block;padding:.8rem 1.8rem;background:linear-gradient(135deg,#d02a2a,#8a1015);color:#f5e8e8;border-radius:100px;text-decoration:none;font-weight:700;letter-spacing:.15em;text-transform:uppercase;font-size:.9rem;transition:.3s;cursor:pointer;border:0;font-family:inherit}
+.btn:hover{transform:translateY(-3px);box-shadow:0 15px 35px -15px rgba(230,55,55,.75)}
+.btn.ghost{background:transparent;border:1px solid #c02a2a;color:#e83838}
+.btn.ghost:hover{background:#c02a2a;color:#f5e8e8}
+.lamp{display:inline-block;margin-top:1.5rem;padding:1rem 1.8rem;border-radius:14px;background:#0c0406;border:1px solid #1c0e12;cursor:crosshair;transition:.5s}
+.lamp-text{font-size:.85rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:transparent;transition:.5s}
+.lamp:hover{border-color:#c02a2a;box-shadow:0 0 35px -10px rgba(230,55,55,.65)}
+.lamp:hover .lamp-text{color:#f5e8e8;text-shadow:0 0 10px rgba(230,55,55,.8),0 0 20px rgba(230,55,55,.55)}
+.hint{display:block;font-size:.55rem;color:#2a1218;margin-top:.3rem;letter-spacing:.3em;text-transform:uppercase}
+.sat{position:relative;width:100%;height:520px;display:flex;align-items:center;justify-content:center;margin:2rem 0;overflow:visible}
+.sat::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(230,55,55,.25),transparent 70%);filter:blur(85px)}
+.photo{position:relative;width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,#d02a2a,#8a1015);display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:900;color:#f5e8e8;border:3px solid rgba(255,255,255,.22);box-shadow:0 0 38px rgba(230,55,55,.6);z-index:10;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.ring{position:absolute;top:50%;left:50%;width:0;height:0}
+.r1{animation:sp 22s linear infinite}
+.r2{animation:sp 32s linear infinite reverse}
+@keyframes sp{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.w{position:absolute;top:0;left:0;font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;padding:.4rem 1rem;color:#f5e5e5;text-shadow:0 0 10px rgba(230,55,55,.7)}
+.w span{display:inline-block}
+.r1 .w span{animation:cs 22s linear infinite}
+.r2 .w span{animation:cs 32s linear infinite reverse}
+@keyframes cs{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+h2{font-size:clamp(1.5rem,5vw,2.5rem);font-weight:800;margin:3rem 0 1rem;color:#f5e5e5}
+h2 em{font-style:normal;color:#e83838}
+p{color:#c8b8b8;line-height:1.7;max-width:640px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:1.5rem 0}
+.stat{background:#12080a;border:1px solid #251014;border-radius:16px;padding:1.2rem;text-align:center;transition:.3s}
+.stat:hover{border-color:#c02a2a}
+.stat b{display:block;font-size:1.8rem;font-weight:900;background:linear-gradient(120deg,#e83838,#a01818);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat span{font-size:.7rem;color:#a08888;text-transform:uppercase;letter-spacing:.15em}
+.words{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}
+.words span{padding:.5rem 1.1rem;border:1px solid #251014;border-radius:100px;font-size:.85rem;color:#e0d0d0;transition:.3s}
+.words span:hover{border-color:#c02a2a;color:#f5e5e5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;margin-top:1.5rem}
+.card{background:#12080a;border:1px solid #251014;border-radius:14px;padding:1rem;transition:.3s}
+.card:hover{transform:translateY(-4px);border-color:#c02a2a;box-shadow:0 15px 35px -15px rgba(230,55,55,.65)}
+.card b{font-size:.9rem;color:#f5e5e5}
+.card span{display:block;font-size:.7rem;color:#a08888;margin-top:.2rem}
+.tl{margin:2rem 0;padding-left:1.5rem;border-left:1px solid #251014}
+.tl-item{padding-bottom:1.5rem;position:relative}
+.tl-item::before{content:'';position:absolute;left:-1.9rem;top:.4rem;width:10px;height:10px;border-radius:50%;background:#d02a2a;box-shadow:0 0 16px rgba(230,55,55,.8)}
+.tl-item .y{font-size:.7rem;letter-spacing:.3em;color:#e83838;text-transform:uppercase}
+.tl-item .t{margin-top:.3rem;color:#c8b8b8}
+.sts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.sts div{padding:.6rem 1.2rem;border-radius:100px;background:#12080a;border:1px solid #251014;font-size:.85rem;color:#e0d0d0}
+.sts b{color:#e83838}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.4s;z-index:9999;padding:1.5rem}
+.modal.on{opacity:1;pointer-events:auto}
+.modal-box{background:linear-gradient(135deg,#12080a,#1c0a0e);border:1px solid rgba(230,55,55,.45);border-radius:24px;padding:2rem;max-width:460px;width:100%;position:relative;transform:scale(.85);transition:.4s}
+.modal.on .modal-box{transform:scale(1)}
+.modal-title{font-size:1.5rem;font-weight:900;margin-bottom:.5rem;background:linear-gradient(120deg,#f5e5e5,#e83838);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-sub{color:#a08888;font-size:.9rem;margin-bottom:1.5rem}
+.modal-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#f5e5e5;font-size:1.1rem;cursor:pointer;transition:.3s}
+.modal-close:hover{background:#c02a2a;transform:rotate(90deg)}
+.poll-option{display:flex;align-items:center;gap:.8rem;padding:.8rem 1rem;border-radius:12px;background:#0c0406;border:1px solid #1c0e12;margin-bottom:.6rem;cursor:pointer;transition:.3s;user-select:none}
+.poll-option:hover{border-color:#c02a2a;transform:translateX(4px)}
+.poll-option input{display:none}
+.poll-option .radio{width:20px;height:20px;border-radius:50%;border:2px solid #4a2a2a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.3s}
+.poll-option .radio::after{content:'';width:10px;height:10px;border-radius:50%;background:#e83838;transform:scale(0);transition:.3s}
+.poll-option input:checked + .radio{border-color:#d02a2a}
+.poll-option input:checked + .radio::after{transform:scale(1)}
+.poll-option .label{font-size:.95rem;font-weight:600;color:#e0d0d0}
+.poll-option input:checked ~ .label{color:#f5e8e8}
+.poll-btn{margin-top:1rem;padding:.8rem 2rem;background:linear-gradient(135deg,#d02a2a,#8a1015);color:#f5e8e8;border:0;border-radius:100px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;font-size:.85rem;cursor:pointer;transition:.3s;font-family:inherit}
+.poll-btn:hover{transform:translateY(-2px);box-shadow:0 15px 35px -15px rgba(230,55,55,.75)}
+.poll-result{margin-top:1rem;font-size:.9rem;color:#e83838;font-weight:700;display:none}
+.poll-result.show{display:block}
+.egg{text-align:center;margin-top:3rem;color:#4a2a2a;cursor:pointer;font-size:.8rem}
+.egg:hover{color:#e83838}
+.egg-msg{max-height:0;overflow:hidden;transition:.6s;color:#c02a2a;font-size:.9rem;text-align:center}
+.egg-msg.open{max-height:200px;margin-top:1rem}
+footer{text-align:center;padding:3rem 1rem;color:#4a2a2a;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div class="spotlight" id="spot"></div>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<div class="glow g3"></div>
+
+<div id="enter"></div>
+<div class="welcome">
+  <div class="grid-bg"></div>
+  <h1>Добро пожаловать<br>в 141 общество</h1>
+  <p>sasavot · stream</p>
+  <a href="#enter" class="wbtn">Enter</a>
+</div>
+
+<div class="floaters" id="floaters"></div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+<div class="modal-box">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<div class="modal-title">Что ещё добавить?</div>
+<div class="modal-sub">Какой раздел про Сасавота ты хочешь видеть на сайте?</div>
+<label class="poll-option">
+<input type="radio" name="game" value="CS 2">
+<div class="radio"></div>
+<div class="label">CS 2</div>
+</label>
+<label class="poll-option">
+<input type="radio" name="game" value="PUBG">
+<div class="radio"></div>
+<div class="label">PUBG</div>
+</label>
+<label class="poll-option">
+<input type="radio" name="game" value="Танки">
+<div class="radio"></div>
+<div class="label">Танки</div>
+</label>
+<label class="poll-option">
+<input type="radio" name="game" value="Всё 3">
+<div class="radio"></div>
+<div class="label">Всё 3 🔥</div>
+</label>
+<button class="poll-btn" onclick="vote()">Проголосовать</button>
+<div class="poll-result" id="pollResult"></div>
+</div>
+</div>
+
+<div class="wrap">
+
+<div class="top-links">
+<a class="twitch" href="https://twitch.tv/sasavot" target="_blank"><svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>Twitch</a>
+<a class="tg" href="https://t.me/sasavot" target="_blank"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
+</div>
+
+<h1>sasa<br>vot</h1>
+<div class="sub">Человек, который превратил обычные стримы в большое комьюнити. Система амбициозного своевольного артиста.</div>
+<div class="crown">♛ Лучший стример года ♛</div>
+
+<div class="btn-row">
+<a href="dota.html" class="btn">Dota 2 →</a>
+<a href="community.html" class="btn ghost">141 общество →</a>
+<button class="btn ghost" onclick="openModal()">Что ещё добавить?</button>
+</div>
+
+<div class="lamp">
+<div class="lamp-text">Глеб, мы тебя любим 💛 Мы без твоих стримов не можем</div>
+<span class="hint">▸ посвети сюда</span>
+</div>
+
+<div class="sat">
+<div class="ring r1" id="r1"></div>
+<div class="ring r2" id="r2"></div>
+<div class="photo"><img src="sasa-photo.jpg" alt="S" onerror="this.remove(); this.parentNode.innerHTML='S';"></div>
+</div>
+
+<h2>Глеб.<br><em>И это его мир.</em></h2>
+<p>sasavot — Глеб Борисович Орлов, стример из Курска. Создал вокруг себя настоящее сообщество — <b>141 GANG</b>. Расшифровка ника: <em>система амбициозного своевольного артиста в обществе товарищей</em>.</p>
+<div class="words">
+<span>Оптимально</span><span>Рационально</span><span>Позитивно</span><span>Конструктивно</span><span>Мотивация</span><span>Импровизация</span><span>Без мам</span><span>Форчан</span><span>Курский капкан</span><span>Курская закалка</span>
+</div>
+
+<h2>Цифры</h2>
+<div class="stats">
+<div class="stat"><b>1.8M</b><span>фолловеров</span></div>
+<div class="stat"><b>36K</b><span>онлайна</span></div>
+<div class="stat"><b>100K</b><span>пик зрителей</span></div>
+<div class="stat"><b>365</b><span>дней вместе</span></div>
+</div>
+
+<h2>Путь</h2>
+<div class="tl">
+<div class="tl-item"><div class="y">Начало</div><div class="t">Курск, первые эфиры — волнение и пара зрителей.</div></div>
+<div class="tl-item"><div class="y">Рост</div><div class="t">Появилось ядро комьюнити — те, кто приходит на атмосферу.</div></div>
+<div class="tl-item"><div class="y">Сейчас</div><div class="t">Лучший стример года, узнаваемый голос и миллионы рядом.</div></div>
+<div class="tl-item"><div class="y">Дальше</div><div class="t">Только вперёд. Новые форматы, то же комьюнити.</div></div>
+</div>
+
+<h2>141 GANG</h2>
+<div class="grid">
+<div class="card"><b>sasavot</b><span>глеб · стример года</span></div>
+<div class="card"><b>rostikfacekid</b><span>ростик</span></div>
+<div class="card"><b>helin139ban</b><span>кирилл</span></div>
+<div class="card"><b>formixyouknow</b><span>витя</span></div>
+<div class="card"><b>iceicell</b><span>лиза</span></div>
+<div class="card"><b>tankzor</b><span>артем</span></div>
+<div class="card"><b>r4dom1r</b><span>рома</span></div>
+<div class="card"><b>yurapivo</b><span>юра</span></div>
+<div class="card"><b>poisonika</b><span>вероника</span></div>
+<div class="card"><b>narek_cr</b><span>нарек</span></div>
+<div class="card"><b>timaevvv</b><span>адам</span></div>
+<div class="card"><b>kennethonline</b><span>кен</span></div>
+</div>
+
+<h2>Что сейчас</h2>
+<div class="sts">
+<div>режим — <b>рофлим и щас</b></div>
+<div>скука — <b>ликвидирована</b></div>
+<div>режим — <b>в эфире</b></div>
+<div>статус — <b>лучший стример года</b></div>
+</div>
+
+<div class="egg" id="egg">▸ нажми, если любопытно</div>
+<div class="egg-msg" id="eggMsg">Рофлили тогда, так и продолжим рофлить. 💛</div>
+
+<footer>© 2026 · sasavot</footer>
+</div>
+
+<script>
+var spot=document.getElementById('spot');
+document.addEventListener('mousemove',function(e){spot.style.left=e.clientX+'px';spot.style.top=e.clientY+'px'});
+document.addEventListener('touchmove',function(e){var t=e.touches[0];spot.style.left=t.clientX+'px';spot.style.top=t.clientY+'px'},{passive:true});
+
+var r1=document.getElementById('r1'),r2=document.getElementById('r2');
+var w1=['141 GANG','Форчан','Курский капкан','Курская закалка','Конструктивно','Мотивация'];
+w1.forEach(function(t,i){var e=document.createElement('div');e.className='w';e.innerHTML='<span>'+t+'</span>';var a=(360/w1.length)*i;e.style.transform='translate(-50%,-50%) rotate('+a+'deg) translateX(150px) rotate(-'+a+'deg)';e.style.left='50%';e.style.top='50%';r1.appendChild(e)});
+var w2=['Импровизация','Без мам','Ыыы смешно','Рофлили тогда, так и продолжим рофлить','Система амбициозного своевольного артиста в обществе товарищей','Оптимально, рационально, позитивно, конструктивно'];
+w2.forEach(function(t,i){var e=document.createElement('div');e.className='w';e.innerHTML='<span>'+t+'</span>';var a=(360/w2.length)*i;e.style.transform='translate(-50%,-50%) rotate('+a+'deg) translateX(240px) rotate(-'+a+'deg)';e.style.left='50%';e.style.top='50%';r2.appendChild(e)});
+
+var fl=document.getElementById('floaters');
+for(var i=0;i<45;i++){
+  var d=document.createElement('div');
+  d.className='drop';
+  var sz=(13+Math.random()*15);
+  d.style.width=sz+'px';
+  d.style.height=(sz*1.25)+'px';
+  d.style.left=(Math.random()*100)+'%';
+  d.style.animationDuration=(3+Math.random()*5)+'s';
+  d.style.animationDelay=(Math.random()*10)+'s';
+  d.style.setProperty('--s',0.5+Math.random()*0.7);
+  var body=document.createElement('div');
+  body.className='body';
+  body.innerHTML='<div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div><div class="bubble b4"></div><div class="bubble b5"></div>';
+  d.appendChild(body);
+  fl.appendChild(d);
+}
+
+document.getElementById('egg').addEventListener('click',function(){document.getElementById('eggMsg').classList.toggle('open')});
+
+function openModal(){document.getElementById('modal').classList.add('on')}
+function closeModal(){document.getElementById('modal').classList.remove('on')}
+
+function vote(){
+  var opts=document.getElementsByName('game');
+  var chosen=null;
+  for(var i=0;i<opts.length;i++){if(opts[i].checked){chosen=opts[i].value;break;}}
+  var res=document.getElementById('pollResult');
+  if(!chosen){res.textContent='Сначала выбери вариант!';res.classList.add('show');return;}
+  res.textContent='Ты хочешь добавить: '+chosen+' ✓ Спасибо!';
+  res.classList.add('show');
+}
+</script>
+</body>
+</html>
